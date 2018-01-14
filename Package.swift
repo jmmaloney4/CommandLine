@@ -1,3 +1,4 @@
+// swift-tools-version:4.0
 /*
  * Package.swift
  * Copyright (c) 2015 Ben Gollmer.
@@ -15,10 +16,20 @@
  * limitations under the License.
  */
 
-// swift-tools-version:4.0
 import PackageDescription
 
 let package = Package(
-  name: "CommandLine",
-  exclude: ["script"]
+    name: "CommandLine",
+    products: [
+    .library(
+        name: "CommandLineKit",
+        targets: ["CommandLineKit"]),
+    ],
+    targets: [
+    .target(name: "CommandLineKit", path: "Sources"),
+    .testTarget(name: "CommandLineKitTests",
+                dependencies: ["CommandLineKit"],
+                path: "Tests/CommandLineKitTests"),
+    ],
+    swiftLanguageVersions: [4]
 )
